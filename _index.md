@@ -12,7 +12,7 @@ As prerequisites you'll have to:
 * Sufficient rights to create a compute instance
 
 ## Create a Windows compute instance with vTPM and Secureboot enabled
-Via the Portal UI
+### Via the Portal UI
 * Configure a Microsoft Windows Server instance as you need
 * Add one Block Storage Volume with 1GiB size - this will be used to store the Bitlocker Recovery Key during configuration
 * In the bottom of the configuration page select "TPM enabled" and "Secureboot" enabled
@@ -20,15 +20,15 @@ Via the Portal UI
 
 ![](bitlocker-1.png "Windows Bitlocker Drive Encryption")
 
-Via the API
+### Via the API
 * Add the following extensions to the create-instance API call:
 ```
 "tpm-enabled": true,
 "secureboot-enabled": true
 ```
 
-## Install Bitlocker and required features
-Via GUI
+## Install and enable Bitlocker
+### Via the Portal UI
 * Configure the additional Block Storage Volume and format it.
 * Open the Server Manager and click on "Manage" -> "Add Roles and Features"
 * On the "Features" tab of the Wizard select "Bitlocker Drive Encryption" and add all required Features
@@ -52,7 +52,7 @@ Via GUI
 
 ![](bitlocker-5.png "Windows Bitlocker Drive Encryption")
 
-Via Powershell
+### Via Powershell
 * Configure the additional Block Storage Volume and format it.
 * Open a Powershell terminal with elevated rights
 * Install Bitlocker and required features:
