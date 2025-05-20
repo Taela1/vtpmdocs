@@ -73,10 +73,14 @@ PS C:\Users\Administrator> Enable-BitLocker -MountPoint "C:" -EncryptionMethod "
 ```
 PS C:\Users\Administrator> Get-BitLockerVolume
 ```
+![](bitlocker-6.png "Windows Bitlocker Drive Encryption")
+
 * Create the recovery key:
 ```
 PS C:\Users\Administrator> Add-BitLockerKeyProtector -MountPoint "C:" -RecoveryPasswordProtector
 ```
+![](bitlocker-7.png "Windows Bitlocker Drive Encryption")
+
 * Copy the Recovery Key to a safe location outside of the compute instance.
 * Remove the Block Storage Volume in the instance configuration once the Recovery Key is secured outside of the compute instance.
 
