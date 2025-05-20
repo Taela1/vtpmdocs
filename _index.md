@@ -17,7 +17,7 @@ Via the Portal UI
 * Add one Block Storage Volume with 1GiB size - this will be used to store the Bitlocker Recovery Key during configuration
 * In the bottom of the configuration page select "TPM enabled" and "Secureboot" enabled
 * Create the instance
-<![](veeam-12-2.png "Immutable Veeam 12 and Exoscale")
+![](bitlocker-1.png "Windows Bitlocker Drive Encryption")
 
 Via the API
 * Add the following extensions to the create-instance API call:
@@ -32,15 +32,17 @@ Via GUI
 * Open the Server Manager and click on "Manage" -> "Add Roles and Features"
 * On the "Features" tab of the Wizard select "Bitlocker Drive Encryption" and add all required Features
 * Finish the Wizard and reboot once the installation of the Feature is done
+![](bitlocker-2.png "Windows Bitlocker Drive Encryption")
 * After the reboot access the Windows Server and open the Explorer
 * Navigate to "This PC" and right click on the drive selected for encryption, click on "Turn on Bitlocker"
-![](veeam-12-2.png "Immutable Veeam 12 and Exoscale")
+![](bitlocker-3.png "Windows Bitlocker Drive Encryption")
 * Follow the Wizard until asked how to backup the Recovery Key. Select "Save to a file" and select the 1GiB block volume, create a folder and store the file into that folder
+![](bitlocker-4.png "Windows Bitlocker Drive Encryption")
 * Finish the Wizard to start encryption. You can let Windows Run the Bitlocker check before by selecting "Run Bitlocker system check", a reboot is required.
 * Click on "Start encrypting"
 * Open the explorer and navigate to the Block Storage Volume and copy the Recovery Key off to an safe destination outside of the compute instance itself. Our SOS Object Storage is an example for a safe place to store the key.
 * Check the encryption is ongoing by openeing the Explorer, navigate to "This PC". Select "Manage Bitlocker" in the menu when right clicking on the disk. It should show "Bitlocker Encrypting" until the disk is encrypted, the status shows "Bitlocker on" once the disk is fully encrypted
-![](veeam-12-2.png "Immutable Veeam 12 and Exoscale")
+![](bitlocker-5.png "Windows Bitlocker Drive Encryption")
 
 Via Powershell
 * Configure the additional Block Storage Volume and format it.
