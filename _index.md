@@ -5,6 +5,8 @@ url: /community/howtos/windows-bitlocker/
 ---
 
 Exoscale supports vTPM and Secureboot technology to allow usage of Windows security features like Bitlocker drive encryption. The required key to unlock the drive is safely stored in the vTPM and no interaction is required when rebooting the server. A recovery key is stored to allow recovery if the VM is migrated off Exoscale or the vTPM is lost.
+Tested on Windows Server 2022 and Windows Server 2025 using Exoscale Templates
+Tested on 20th of March 2025
 
 ## Prerequisites
 As prerequisites you'll have to:
@@ -47,10 +49,12 @@ As prerequisites you'll have to:
 
 * Finish the Wizard to start encryption. You can let Windows Run the Bitlocker check before by selecting "Run Bitlocker system check", a reboot is required.
 * Click on "Start encrypting"
-* Open the explorer and navigate to the Block Storage Volume and copy the Recovery Key off to an safe destination outside of the compute instance itself. Our SOS Object Storage is an example for a safe place to store the key.
+* Open the explorer and navigate to the Block Storage Volume and copy the Recovery Key off to an safe destination outside of the compute instance.
 * Check the encryption is ongoing by openeing the Explorer, navigate to "This PC". Select "Manage Bitlocker" in the menu when right clicking on the disk. It should show "Bitlocker Encrypting" until the disk is encrypted, the status shows "Bitlocker on" once the disk is fully encrypted
 
 ![](bitlocker-5.png "Windows Bitlocker Drive Encryption")
+
+* Remove the Block Storage Volume in the instance configuration once the Recovery Key is secured outside of the instance
 
 ### Via Powershell
 * Configure the additional Block Storage Volume and format it.
@@ -71,7 +75,9 @@ PS C:\Users\Administrator> Get-BitLockerVolume
 ```
 * Create the recovery key:
 ```
-PS C:\Users\Administrator> Add-BitLockerKeyProtector -MountPoint "C:" -RecoveryKeyProtector -RecoveryKeyPath "D:"
-PS C:\Users\Administrator> (Get-BitLockerVolume -MountPoint "C:").KeyProtector > "D:\RecoveryKey\C-drive.txt"
+PS C:\Users\Administrator> Add-BitLockerKeyProtector -MountPoint "C:" -RecoveryPasswordProtector
 ```
-* Copy the Recovery Key to a safe location outside of the compute instance. Our SOS Object Storage is an example for a safe place to store the key.
+* Copy the Recovery Key to a safe location outside of the compute instance.
+* Remove the Block Storage Volume in the instance configuration once the Recovery Key is secured outside of the compute instance.
+
+
